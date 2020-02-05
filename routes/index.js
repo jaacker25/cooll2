@@ -6,13 +6,27 @@ const {signup, signUpView, login, loginView, logout} = require("../controllers/a
 const {createProjectView,projectsView,projectPost,detailProject,detailProjectPost,deleteProject}=require("../controllers/projectsControllers")
 const {isAuthenticated,checkRole}=require("../middlewares")
 /* GET home page */
-router.get('/', (req, res, next) => {
 
+const user = require("../models/User")
+
+
+
+
+router.get('/', (req, res, next) => {
+  
+  //console.log(userlogin)
+  /*const w=user.findById("5e3abee1dec18b01baaf3e25").then((x)=>{
+    console.log(x.name)
+  }
+    
+  ).catch()
+   */
   res.render('index');
 });
 router.get('/signup',signUpView);
 router.post('/signup',signup)
 router.get("/login", loginView)
+
 router.post("/login",
             passport.authenticate("local",{
               successRedirect:"/projects",
@@ -25,7 +39,7 @@ router.post("/login",
             //Aqui va facebook
 router.get('/auth/facebook', passport.authenticate('facebook'));
  router.get('/auth/facebook/callback',
-   passport.authenticate('facebook', { successRedirect: '/create',
+   passport.authenticate('facebook', { successRedirect: '/projects',
   failureRedirect: '/login' }, ));
 
 

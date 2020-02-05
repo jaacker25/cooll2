@@ -12,8 +12,14 @@ const session = require("express-session")
 const flash=require('connect-flash')
 const {isAuthenticated,checkRole}=require("./middlewares")
 
+
+
+
+
 mongoose
-  .connect('mongodb://localhost/cooll2-DB', {useNewUrlParser: true, useUnifiedTopology: true})
+  //.connect('mongodb://localhost/cooll2-DB', {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect('mongodb+srv://cooll2:cooll2.Access2@cluster0-lqxxn.mongodb.net/cooll2?retryWrites=true&w=majority', {useNewUrlParser: true, useUnifiedTopology: true})
+            
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
@@ -25,6 +31,8 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
+
+
 
 // Middleware Setup
 app.use(logger('dev'));
